@@ -16,12 +16,14 @@ void errorexit(const char *s) {
 __global__ 
 void calculate(float *result) {
     int my_index = blockIdx.x*blockDim.x+threadIdx.x;
+    result[my_index] = 1 / powf(2, (my_index - 1))
+    __syncthreads ();
 
     for ( unsigned int s = 1; s < blockDim .x; s *= 2) {
       if ( my_index % (2 * s) == 0) {
         result[ my_index ] += result[ my_index + s ];
       }
-      __syncthreads () ;
+      __syncthreads ();
     }
 }
 
