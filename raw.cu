@@ -16,7 +16,7 @@ void errorexit(const char *s) {
 __global__ 
 void calculate(float *result) {
     int my_index = blockIdx.x*blockDim.x+threadIdx.x;
-    result[my_index] = 1 / powf(2, (my_index - 1))
+    result[my_index] = 1 / powf(2, my_index)
     __syncthreads ();
 
     for ( unsigned int s = 1; s < blockDim .x; s *= 2) {
