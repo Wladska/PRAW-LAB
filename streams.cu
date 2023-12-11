@@ -110,7 +110,7 @@ int main(int argc,char **argv) {
 		totalNumber += hHistogram[i];
 	}
 
-	printf("Totlan numbers count in the histogram is %d\n", i , totalNumber);
+	printf("Totlan numbers count in the histogram is %d\n", totalNumber);
 
 //Free memory and destroy streams
     for(int i=0;i<numberOfStreams;i++) {
