@@ -77,6 +77,15 @@ int main(int argc,char **argv) {
 	if (cudaSuccess!=cudaMemcpy(hHistogram, dHistogram, (MAX_NUM + 1) * sizeof(int),cudaMemcpyDeviceToHost))
 		 errorexit("Error copying results");
 
+	int totalNumber = 0;	 
+
+	for(int i=0; i<MAX_NUM; i++) {
+		printf("number %d : %d \n", i , hHistogram[i]);
+		totalNumber += hHistogram[i];
+	}
+
+	printf("Totlan numbers count in the histogram is %d\n", i , totalNumber);
+
 	//Free memory
 	free(hHistogram);
 	free(hMatrix);
