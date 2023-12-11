@@ -25,7 +25,7 @@ __global__
 void calculation(int *matrix, int *histogram, int matrixSize) {
 		int my_index=blockIdx.x*blockDim.x+threadIdx.x;
 		if (my_index < matrixSize) {
-			atomicAdd(histogram[matrix[my_index]], 1);
+			atomicAdd(&(histogram[matrix[my_index]]), 1);
 		} 
 }
 

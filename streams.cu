@@ -26,7 +26,7 @@ void calculation(int *matrix, int *even, int *odd, int matrixSize, int streamChu
     int my_index=blockIdx.x*blockDim.x+threadIdx.x+streamId*streamChunk;
 
    	if (my_index < matrixSize) {
-			atomicAdd(histogram[matrix[my_index]], 1);
+			atomicAdd(&(histogram[matrix[my_index]]), 1);
 		} 
 }
 
@@ -102,6 +102,15 @@ int main(int argc,char **argv) {
   //copy results from GPU
   	if (cudaSuccess!=cudaMemcpy(hHistogram, dHistogram, (MAX_NUM + 1) * sizeof(int),cudaMemcpyDeviceToHost))
 		  errorexit("Error copying results");
+  
+	int totalNumber = 0;	 
+
+	for(int i=0; i<MAX_NUM; i++) {
+		printf("number %d : %d \n", i , hHistogram[i]);
+		totalNumber += hHistogram[i];
+	}
+
+	printf("Totlan numbers count in the histogram is %d\n", i , totalNumber);
 
 //Free memory and destroy streams
     for(int i=0;i<numberOfStreams;i++) {
