@@ -22,7 +22,7 @@ void generate(int *matrix, int matrixSize) {
 }
 
 __global__ 
-void calculation(int *matrix, int *even, int *odd, int matrixSize, int streamChunk, int streamId) {
+void calculation(int *matrix, int *histogram, int matrixSize, int streamChunk, int streamId) {
     int my_index=blockIdx.x*blockDim.x+threadIdx.x+streamId*streamChunk;
 
    	if (my_index < matrixSize) {
