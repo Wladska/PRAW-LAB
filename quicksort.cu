@@ -7,6 +7,7 @@ CUDA - dynamic parallelism sample
 #include <ctime>
 #include <random>
 #include <cmath>
+#include <iostream>
 
 #define ARRAY_SIZE 100
 
