@@ -31,8 +31,12 @@ int main(int argc,char **argv) {
     int *results;
 
     //unified memory allocation - available for host and device
-    if (cudaSuccess!=cudaMallocManaged(&results,blocksingrid*sizeof(int)))
+    if (cudaSuccess!=cudaMallocManaged(&results,blocksingrid * sizeof(int)))
       errorexit("Error allocating memory on the GPU");
+
+    //initialize allocated counters with 0
+    if (cudaSuccess!=cudaMemset(results,0, blocksingrid * sizeof(int)))
+      errorexit("Error initializing memory on the GPU");
 
     //call to GPU - kernel execution 
     calculate<<<blocksingrid,threadsinblock>>>(results, NUMBER, BIGGEST_NUMBER_TO_CHECK);
