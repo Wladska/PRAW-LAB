@@ -45,14 +45,14 @@ int main(int argc,char **argv) {
 
     //calculate sum of all elements
     int result=0;
-    for(int i=0;i<size;i++) {
+    for(int i=0;i<blocksingrid;i++) {
       result += results[i];
     }
 
     if (result == 0) {
-      printf("\nNumber IS prime",result);
+      printf("Number IS prime\n");
     } else {
-      printf("\nNumber IS NOT prime");
+      printf("Number IS NOT prime\n");
     }
 
     //free memory
