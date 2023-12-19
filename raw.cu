@@ -50,7 +50,7 @@ int main(int argc,char **argv) {
     //calculate sum of all elements
     int result = 0;
     for(int i=0; i<blocksingrid; i++) {
-      result += results[i];
+      result += host_results[i];
     }
 
     if (result == 0) {
