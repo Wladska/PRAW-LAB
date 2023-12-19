@@ -27,14 +27,15 @@ int main(int argc,char **argv) {
     int threadsinblock = 1024;
     int blocksingrid= BIGGEST_NUMBER_TO_CHECK / threadsinblock;	
 
-    int *results;
+    int *host_results = (int*)malloc(blocksingrid * sizeof(int));
+    int *results=NULL;
 
     //unified memory allocation - available for host and device
     if (cudaSuccess!=cudaMalloc(&results,blocksingrid * sizeof(int)))
       errorexit("Error allocating memory on the GPU");
 
     //initialize allocated counters with 0
-    if (cudaSuccess!=cudaMemset(results,0, blocksingrid * sizeof(int)))
+    if (cudaSuccess!=cudaMemset(results, 0, blocksingrid * sizeof(int)))
       errorexit("Error initializing memory on the GPU");
 
     //call to GPU - kernel execution 
@@ -43,13 +44,12 @@ int main(int argc,char **argv) {
     if (cudaSuccess!=cudaGetLastError())
       errorexit("Error during kernel launch");
   
-    int *host_results = (int*)malloc(blocksingrid * sizeof(int));
-    if (cudaSuccess!=cudaMemcpy(host_results, results,blocksingrid * sizeof(int), cudaMemcpyDeviceToHost))
+    if (cudaSuccess!=cudaMemcpy(host_results, results, blocksingrid * sizeof(int), cudaMemcpyDeviceToHost))
        errorexit("Error copying results");
 
     //calculate sum of all elements
-    int result=0;
-    for(int i=0;i<blocksingrid;i++) {
+    int result = 0;
+    for(int i=0; i<blocksingrid; i++) {
       result += results[i];
     }
 
